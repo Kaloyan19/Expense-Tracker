@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Home</title>
+    <title>Dashboard</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,27 +13,24 @@
         }
         .container {
             background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            height: 600px;
-            width: 550px;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+            width: 450px;
             text-align: center;
         }
         h2 {
             color: #333;
             font-size: 2em;
         }
-        .button-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
+        p {
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 20px;
         }
         .button {
             display: inline-block;
-            padding: 15px 30px;
-            margin: 10px;
+            padding: 12px 24px;
             background-color: #007BFF;
             color: white;
             border-radius: 8px;
@@ -45,20 +42,13 @@
         .button:hover {
             background-color: #0056b3;
         }
-        .emoji {
-            font-size: 150px;
-            margin-top: 30px;
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Welcome to the Expense Tracker!</h2>
-        <div class="button-container">
-            <a href="{% url 'register' %}" class="button">Register</a>
-            <a href="{% url 'login' %}" class="button">Log In</a>
-        </div>
-        <div class="emoji">😊</div>
+        <h2>Welcome to Your Dashboard!</h2>
+        <p>You are now logged in. More features will be coming soon!</p>
+        <a href="{% url 'logout' %}" class="button">Log Out</a>
     </div>
 </body>
 </html>

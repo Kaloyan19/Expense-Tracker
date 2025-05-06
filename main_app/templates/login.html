@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'register.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+            width: 450px;
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+            font-size: 2em;
+        }
+        form {
+            display: flex;
+            flex-direction: column; /* Ensures elements stack vertically */
+            align-items: center; /* Centers elements inside the form */
+            width: 100%;
+        }
+        input {
+            background-color: red;
+            color: white;
+            border: 2px solid darkred;
+            padding: 12px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            width: 100%;
+            text-align: left; /* Removes center alignment */
+            box-sizing: border-box; /* Ensures equal spacing */
+        }
+        button {
+            padding: 10px 20px; /* Makes the button slightly smaller */
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 10px; /* Adds space between inputs and button */
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Log In</button>
+        </form>
+    </div>
+</body>
+</html>
