@@ -1,0 +1,10 @@
+<h2>Your Expenses</h2>
+<ul>
+    {% for expense in expenses %}
+        <li>{{ expense.title }} - ${{ expense.amount }}
+            <a href="{% url 'update_expense' expense.id %}">Edit</a> |
+            <a href="{% url 'delete_expense' expense.id %}">Delete</a>
+        </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'create_expense' %}">Add New Expense</a>

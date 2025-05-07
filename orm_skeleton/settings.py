@@ -78,15 +78,13 @@ WSGI_APPLICATION = 'orm_skeleton.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "django_9",
+        "NAME": "expense_tracker",
         "USER": "postgres",
         "PASSWORD": "softuni",
         "HOST": "localhost",
         "PORT": "5432",
     }
 }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
