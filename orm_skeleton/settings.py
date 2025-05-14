@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -78,7 +79,7 @@ WSGI_APPLICATION = 'orm_skeleton.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "expense_tracker",
+        "NAME": "expense_tracker_2",
         "USER": "postgres",
         "PASSWORD": "softuni",
         "HOST": "localhost",
@@ -120,12 +121,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # Ensure this exists
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # ✅ Add this line
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = "/dashboard/"
-LOGOUT_REDIRECT_URL = "/login/"
+LOGIN_URL = "/login/"  # ✅ Redirect unauthenticated users to login
+LOGIN_REDIRECT_URL = "/dashboard/"  # ✅ Redirect users to the dashboard after login
+LOGOUT_REDIRECT_URL = "/login/"  # ✅ Redirect users to login after logout

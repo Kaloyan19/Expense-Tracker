@@ -1,0 +1,31 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+    width: 450px;
+    text-align: center;
+}
+input {
+    background-color: red;
+    color: white;
+    border: 2px solid darkred;
+    padding: 12px;
+    font-size: 1.2em;
+    border-radius: 5px;
+    width: 100%;
+}
+.helptext {
+    display: block;
+    margin-top: 8px;
+    font-size: 1em;
+    color: gray;
+}

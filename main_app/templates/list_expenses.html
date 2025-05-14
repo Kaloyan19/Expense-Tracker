@@ -1,10 +1,29 @@
 <h2>Your Expenses</h2>
-<ul>
-    {% for expense in expenses %}
-        <li>{{ expense.title }} - ${{ expense.amount }}
-            <a href="{% url 'update_expense' expense.id %}">Edit</a> |
-            <a href="{% url 'delete_expense' expense.id %}">Delete</a>
-        </li>
-    {% endfor %}
-</ul>
-<a href="{% url 'create_expense' %}">Add New Expense</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Title</th>
+            <th>Amount</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for expense in expenses %}
+            <tr>
+                <td>{{ expense.date }}</td>
+                <td>{{ expense.title }}</td>
+                <td>${{ expense.amount }}</td>
+                <td>
+                    <a href="{% url 'update_expense' expense.id %}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{% url 'delete_expense' expense.id %}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="4" class="text-center">No expenses found.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'create_expense' %}" class="btn btn-primary">Add New Expense</a>

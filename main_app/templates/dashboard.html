@@ -1,54 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Dashboard</title>
+
+    <!-- Load Django Static Files -->
+    {% load static %}
+
+    <!-- Load Bootstrap Locally -->
+    <link href="{% static 'css/bootstrap-5.3.6-dist/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- ✅ Load Chart.js first -->
+    <script src="{% static 'js/chart.min.js' %}"></script>
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        .chart-container {
+            width: 80%;
+            margin: 20px auto;
+            min-height: 300px;
         }
-        .container {
-            background-color: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
-            width: 450px;
-            text-align: center;
+        .summary-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-        h2 {
-            color: #333;
-            font-size: 2em;
-        }
-        p {
-            font-size: 1.2em;
-            color: #555;
+        .chart-title {
             margin-bottom: 20px;
+            font-weight: 500;
         }
-        .button {
-            display: inline-block;
-            padding: 12px 24px;
-            background-color: #007BFF;
-            color: white;
-            border-radius: 8px;
-            font-size: 1.2em;
-            font-weight: bold;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-        }
-        .button:hover {
-            background-color: #0056b3;
+        .debug-output {
+            background: #f1f1f1;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Welcome to Your Dashboard!</h2>
-        <p>You are now logged in. More features will be coming soon!</p>
-        <a href="{% url 'logout' %}" class="button">Log Out</a>
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">Expense Dashboard</h1>
+
+        <div class="summary-card">
+            <h3 class="text-center">Total Spent: ${{ total_spent|floatformat:2 }}</h3>
+        </div>
+
+<!-- ✅ Show Recent Expenses -->
+        <div class="mt-4">
+            <h4>Recent Expenses</h4>
+            <ul>
+                {% for expense in recent_expenses %}
+                    <li>{{ expense.title }} - ${{ expense.amount }}</li>
+                {% empty %}
+                    <li>No recent expenses.</li>
+                {% endfor %}
+            </ul>
+            <a href="{% url 'list_expenses' %}" class="btn btn-secondary">View All Expenses</a>
+        </div>
+
+        <div class="debug-output">
+            <strong>Category Data:</strong> {{ category_data|safe }}<br>
+            <strong>Monthly Labels:</strong> {{ monthly_labels|safe }}<br>
+            <strong>Monthly Values:</strong> {{ monthly_values|safe }}
+        </div>
+
+        <!-- Summary Card -->
+        <div class="summary-card">
+            <h3 class="text-center">Total Spent: ${{ total_spent|floatformat:2 }}</h3>
+        </div>
+
+        <!-- Two-column layout for charts -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="chart-container">
+                    <h4 class="text-center chart-title">Expenses by Category</h4>
+                    <canvas id="categoryChart"></canvas>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="chart-container">
+                    <h4 class="text-center chart-title">Monthly Expenses</h4>
+                    <canvas id="monthlyChart"></canvas>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <!-- ✅ Correct way to pass JSON data -->
+    <script id="categoryData" type="application/json">
+        {{ category_data|json_script:"categoryData" }}
+    </script>
+
+    <script id="monthlyLabels" type="application/json">
+        {{ monthly_labels|json_script:"monthlyLabels" }}
+    </script>
+
+    <script id="monthlyValues" type="application/json">
+        {{ monthly_values|json_script:"monthlyValues" }}
+    </script>
+
+    <!-- ✅ Load dashboard.js after Chart.js -->
+    <script src="{% static 'js/dashboard.js' %}"></script>
 </body>
 </html>

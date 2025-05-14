@@ -1,7 +1,17 @@
-<h2>Add Expense</h2>
 <form method="POST">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Save Expense</button>
+
+    <!-- ✅ Category Selection Dropdown -->
+    <label for="category">Select Category:</label>
+    <select name="category" id="category">
+        {% for category in categories %}
+            <option value="{{ category.id }}">{{ category.name }}</option>
+        {% endfor %}
+    </select>
+
+    <!-- ✅ Button to Add a New Category -->
+    <a href="{% url 'add_category' %}" class="btn btn-secondary">Add New Category</a>
+
+    <button type="submit">Add Expense</button>
 </form>
-<a href="{% url 'list_expenses' %}">Back to Expenses</a>

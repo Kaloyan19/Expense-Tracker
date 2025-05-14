@@ -1,7 +1,6 @@
 from django.urls import path
-from main_app.views import register, home, dashboard, create_expense, list_expenses, update_expense, delete_expense
+from main_app.views import add_category ,register, home, dashboard, create_expense, list_expenses, update_expense, delete_expense
 from django.contrib.auth.views import LoginView, LogoutView
-
 urlpatterns = [
     path("", home, name="home"),
     path("register/", register, name="register"),
@@ -12,4 +11,6 @@ urlpatterns = [
     path("expenses/new/", create_expense, name="create_expense"),
     path("expenses/<int:expense_id>/edit/", update_expense, name="update_expense"),
     path("expenses/<int:expense_id>/delete/", delete_expense, name="delete_expense"),
+    path("add-category/", add_category, name="add_category"),
 ]
+
